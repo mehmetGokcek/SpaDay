@@ -1,21 +1,35 @@
-﻿
+﻿@using SpaDay.ViewModels;
+
+@model AddUserViewModel
+
 <h1>User Sign Up Form</h1><br><br>
 
-<h2>@ViewBag.Error</h2><br><br>
 
-    <form method='post'>
+<form aps-controller="User" asp-action="Add" method="post">
 
-        <label for="UserName">User Name: </label><br>
-        <input type="text" id="UserName" name="UserName" value= "@ViewBag.UserName"><br>
+    <div class="form-group">
+        <label asp-for="Username"></label>
+        <input asp-for="Username" />
+        <span asp-validation-for="Username"></span>
+    </div>
 
-        <label for="Email">Email: </label><br>
-        <input type="email" id="Email" name="Email" value="@ViewBag.Email"><br>
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" />
+        <span asp-validation-for="Email"></span>
+    </div>
 
-        <label for="Password">Password: </label><br>
-        <input type="password" id="Password" name="Password"><br>
+    <div class="form-group">
+        <label asp-for="Password"></label>
+        <input asp-for="Password"  type="password"/>
+        <span asp-validation-for="Password"></span>
+    </div>
 
-        <label for="ConfirmPassword">Confirm Password: </label><br>
-        <input type="password" id="ConfirmPassword" name="ConfirmPassword"><br><br>
+    <div class="form-group">
+        <label asp-for="VerifyPassword"></label>
+        <input asp-for="VerifyPassword" type="password" />
+        <span asp-validation-for="VerifyPassword"></span>
+    </div>
 
         <input type='submit' value='Submit'>
 

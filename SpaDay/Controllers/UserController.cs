@@ -5,43 +5,54 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SpaDay.Data;
 using SpaDay.Models;
+using SpaDay.ViewModels;
 
 namespace SpaDay.Controllers
 {
     public class UserController : Controller
     {
-
         public IActionResult Index()
         {
-            ViewBag.Users = UserData.GetAll();
-      
+            List<User> users= new List<User>(UserData.GetAll());
+
+            return View(users);
+        }
+
+        public IActionResult Add()
+        {
             return View();
         }
 
+
+
+
         [HttpPost]
-        [HttpGet]
-        public IActionResult Add(User newUser, string ConfirmPassword)
+        public IActionResult Add(AddUserViewModel addUserViewModel)
         {
-            if (ConfirmPassword != null)
+            if (ModelState.IsValid)
             {
-                if (newUser.Password == ConfirmPassword)
-                {
-                    DateTime localDate = DateTime.Now;
-                    newUser.Now = localDate;
-                    UserData.Add(newUser);
-                    return Redirect("/User");
 
-                }
-
-                else
+                User newUser = new User
                 {
-                    ViewBag.Error = "Password fields must match!";
-                    ViewBag.UserName = newUser.UserName;
-                    ViewBag.Email = newUser.Email;
-                }
+                    Username = addUserViewModel.Username,
+                    Email = addUserViewModel.Email,
+                    Password = addUserViewModel.Password,
+                    Now = DateTime.Now
+
+                };
+
+                UserData.Add(newUser);
+                return Redirect("/user");
             }
 
-             return View();
+            else
+            {
+                return View(addUserViewModel);
+            }
+
         }
+
+
+
     }
 }

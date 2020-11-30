@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SpaDay.Models
 {
@@ -9,7 +6,7 @@ namespace SpaDay.Models
     {
         //Username, Email, and Password.
 
-        public string UserName { get; set; }
+        public string Username { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
         public DateTime Now { get; set; }
@@ -17,9 +14,9 @@ namespace SpaDay.Models
 
         public User(){}
 
-        public User(string userName, string email, string password)
+        public User(string username, string email, string password)
         {
-            UserName = userName;
+            Username = username;
             Email = email;
             Password = password;
         }
